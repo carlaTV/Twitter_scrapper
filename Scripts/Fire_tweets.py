@@ -78,11 +78,21 @@ def split_hashtag(hashtag):
 
 
 def credentials():
-    ts = TwitterSearch(consumer_key='**',
-        consumer_secret='**',
-        access_token='**-**',
-        access_token_secret='**')
-    return ts
+    with open('/home/carlatv/PycharmProjects/Twitter_scrapper/credentials','r') as f:
+        content = json.load(f)
+        consumer_key = content['credentials']['consumer_key']
+        consumer_secret = content['credentials']['consumer_secret']
+        access_token = content['credentials']['consumer_secret']
+        access_token_secret = content['credentials']['consumer_secret']
+        if '*' in consumer_key:
+            print 'Put your Twitter developer credentials in the file \'credentials\'. You can find them at https://apps.twitter.com/'
+        else:
+            ts = TwitterSearch(consumer_key = '\''+consumer_key+'\'',
+            consumer_secret = '\''+consumer_secret+'\'',
+            access_token = '\''+access_token+'\'',
+            access_token_secret = '\''+access_token_secret+'\'')
+            return ts
+
 
 def writeOpening():
     with open(filename, 'w') as fd:
